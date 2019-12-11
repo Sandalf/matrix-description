@@ -57,12 +57,13 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 19 "parser.y"
+#line 36 "parser.y"
 
     float val;
     matrix *mptr;
+    node *node; 
 
-#line 66 "parser.hpp"
+#line 67 "parser.hpp"
 
 };
 typedef union YYSTYPE YYSTYPE;

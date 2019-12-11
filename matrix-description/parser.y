@@ -1,4 +1,20 @@
 %{
+// mexp:
+//     mexp '+' mterm { $$ = newnode(_sum, $1, $3); } 
+//     | mexp '-' mterm { $$ = newnode(_dif, $1, $3); } 
+//     | mterm { $$ = $1; }
+//     ;
+
+// mterm:
+//     mterm '*' mfact { $$ = newnode(_mult, $1, $3); }
+//     | mfact { $$ = $1; }
+//     ;
+
+// mfact:
+//     '(' { printf("mfact"); } mexp ')' { $$ = $3; }
+//     | mdef { $$ = newnode(_matrix, mtemp); }
+//     ;
+
 // bison -d parser.y -o parser.cpp
 #include <cstdio>
 #include "abstree.hpp"
@@ -13,21 +29,40 @@ matrix *mresult = NULL;
 matrix *mtemp = NULL;
 int ncol = 0;
 int nrow = 0;
+node *tree = NULL;
 
 %}
 
 %union {
     float val;
     matrix *mptr;
+    node *node; 
 }
 
 %token <val> NUM
 %type <val> exp term fact // numeric expressions
 %type <mptr> mdef rowseq row // matrix description
+%type <node> mfact mterm mexp // matrix expressions
 
 %%
 
-begin: mdef { mresult = $1; };
+begin: mexp { tree = $1; };
+
+mexp:
+    mexp '+' mterm { $$ = newnode(_sum, $1, $3); } 
+    | mexp '-' mterm { $$ = newnode(_dif, $1, $3); } 
+    | mterm { $$ = $1; }
+    ;
+
+mterm:
+    mterm '*' mfact { $$ = newnode(_mult, $1, $3); }
+    | mfact { $$ = $1; }
+    ;
+
+mfact:
+    '(' mexp ')' { $$ = $2; }
+    | mdef { $$ = newnode(_matrix, mtemp); }
+    ;
 
 mdef:
     '[' { ncol = 1; nrow = 1; mtemp = newmatrix(ncol,nrow); } rowseq ']' { $$ = $3; }

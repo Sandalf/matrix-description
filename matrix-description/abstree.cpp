@@ -16,3 +16,21 @@ matrix *newmatrix(int row, int col) {
     m -> data = *t;
     return m;
 }
+
+node *newnode(tnode t, matrix *m) {
+    node *n = new node;
+    n -> type = t;
+    n -> M = m;
+    n -> lft = NULL;
+    n -> rgt = NULL;
+    return n;
+}
+
+node *newnode(tnode t, node * lop, node * rop) {
+    node *n = new node;
+    n -> type = t;
+    n -> M = NULL;
+    n -> lft = lop;
+    n -> rgt = rop;
+    return n;
+}

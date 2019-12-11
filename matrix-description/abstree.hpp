@@ -12,6 +12,13 @@
 #include <stdio.h>
 #include <map>
 
+typedef enum {
+    _sum,
+    _dif,
+    _mult,
+    _matrix
+} tnode;
+
 typedef std::map<int,float> row;
 typedef std::map<int,row> table;
 
@@ -20,6 +27,15 @@ typedef struct {
     table data; // Content of the matrix
 } matrix;
 
+typedef struct x {
+    int type; // Node type ('+', '-', '*' or 'M')
+    matrix *M; // Matrix associated to the node
+    struct x *lft; // Link to left sub-tree
+    struct x *rgt; // Link to right sub-tree
+} node;
+
 matrix *newmatrix(int, int);
+node *newnode(tnode, matrix *);
+node *newnode(tnode, node *, node *);
 
 #endif /* abstree_hpp */

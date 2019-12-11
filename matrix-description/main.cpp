@@ -11,7 +11,8 @@
 
 extern FILE* yyin;
 extern int yyparse();
-extern matrix *mresult;
+//extern matrix *mresult;
+extern node *tree;
 
 bool parse(const char *fname) {
     yyin = fopen(fname,"r");
@@ -26,7 +27,8 @@ void show(matrix &M);
 int main(int argc, const char * argv[]) {
     if (parse("prueba.txt")) {
         printf("Parsed\n");
-        show(*mresult);
+//        show(*mresult);
+        show(*tree->M);
     } else {
         printf("Not ok\n");
     }
