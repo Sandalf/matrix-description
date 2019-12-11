@@ -22,27 +22,14 @@ bool parse(const char *fname) {
     return x == 0;
 }
 
-void show(matrix &M);
-
 int main(int argc, const char * argv[]) {
     if (parse("prueba.txt")) {
         printf("Parsed\n");
 //        show(*mresult);
-        show(*tree->M);
+//        show(*tree->M);
+        traverse(tree, 0);
     } else {
         printf("Not ok\n");
     }
     return 0;
-}
-
-void show(matrix &M) {
-    printf("[");
-    for(int i = 1; i <= M.n; i++) {
-        for(int j = 1; j <= M.m; j++) {
-            printf(" %f", M.data[i][j]);
-            if (j < M.m) printf(",");
-        }
-        printf(";");
-    }
-    printf("]\n");
 }

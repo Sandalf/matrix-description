@@ -34,3 +34,50 @@ node *newnode(tnode t, node * lop, node * rop) {
     n -> rgt = rop;
     return n;
 }
+
+void show(matrix &M) {
+    printf("[");
+    for(int i = 1; i <= M.n; i++) {
+        for(int j = 1; j <= M.m; j++) {
+            printf(" %f", M.data[i][j]);
+            if (j < M.m) printf(",");
+        }
+        printf(";");
+    }
+    printf("]\n");
+}
+
+void indent (int deep) {
+    while (deep > 0) {
+        --deep;
+        printf(" ");
+    }
+}
+
+void traverse(node *p, int deep) {
+    indent(deep);
+    
+    switch (p->type) {
+        case _sum:
+            printf("+\n");
+            traverse(p->lft, deep + 1);
+            traverse(p->rgt, deep + 1);
+            break;
+        case _dif:
+            printf("-\n");
+            traverse(p->lft, deep + 1);
+            traverse(p->rgt, deep + 1);
+            break;
+        case _mult:
+            printf("*\n");
+            traverse(p->lft, deep + 1);
+            traverse(p->rgt, deep + 1);
+            break;
+        case _matrix:
+            printf("matrix: ");
+            show(*p->M);
+            break;
+        default:
+            break;
+    }
+}

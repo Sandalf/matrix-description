@@ -37,5 +37,7 @@ typedef struct x {
 matrix *newmatrix(int, int);
 node *newnode(tnode, matrix *);
 node *newnode(tnode, node *, node *);
+void traverse(node *, int);
+void show(matrix &M);
 
 #endif /* abstree_hpp */
