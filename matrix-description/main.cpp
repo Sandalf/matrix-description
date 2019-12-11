@@ -28,6 +28,8 @@ int main(int argc, const char * argv[]) {
 //        show(*mresult);
 //        show(*tree->M);
         traverse(tree, 0);
+        printf("Result:\n");
+        show(*evaluate(tree));
     } else {
         printf("Not ok\n");
     }

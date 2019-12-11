@@ -81,3 +81,25 @@ void traverse(node *p, int deep) {
             break;
     }
 }
+
+matrix *evaluate(node *p) {
+    switch (p->type) {
+        case _sum: return add(evaluate(p->lft), evaluate(p->rgt));
+//        case _dif: return subs(evaluate(p->lft), evaluate(p->rgt));
+//        case _mult: return mult(evaluate(p->lft), evaluate(p->rgt));
+        case _matrix: return p->M;
+        default:
+            return NULL;
+            break;
+    }
+}
+
+matrix *add(matrix *a, matrix *b) {
+    matrix *m = newmatrix(a->n, a->m);
+    for(int i = 1; i <= a->n; i++) {
+        for(int j = 1; j <= a->m; j++) {
+            m->data[i][j] = a->data[i][j] + b->data[i][j];
+        }
+    }
+    return m;
+}

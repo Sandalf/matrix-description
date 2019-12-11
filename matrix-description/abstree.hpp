@@ -34,10 +34,17 @@ typedef struct x {
     struct x *rgt; // Link to right sub-tree
 } node;
 
+// Build tree
 matrix *newmatrix(int, int);
 node *newnode(tnode, matrix *);
 node *newnode(tnode, node *, node *);
+
+// Work with tree
+matrix *evaluate(node *p);
 void traverse(node *, int);
 void show(matrix &M);
+matrix *add(matrix *a, matrix *b);
+matrix *subs(matrix *a, matrix *b);
+matrix *mult(matrix *a, matrix *b);
 
 #endif /* abstree_hpp */
