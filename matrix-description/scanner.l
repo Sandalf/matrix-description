@@ -10,16 +10,18 @@ int contador = 1;
 %}
 
 numero  [0-9]+("."[0-9]+)?
-op      [-+*/]
+op      [-+*/:]
 delim   [()\[\],;]
 espacio [ \t]
 nlinea  \n
+id      [a-zA-Z]*
 
 %%
 
 throw   return THROW;
 
 {numero}  { yylval.val = atof(yytext); return NUM; }
+{id}      { yylval.id = strdup(yytext); return ID; }
 {op}      return *yytext;
 {delim}   return *yytext;
 {espacio} /* Solo los ignora */;

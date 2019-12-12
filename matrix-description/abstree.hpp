@@ -28,6 +28,8 @@ typedef struct {
     table data; // Content of the matrix
 } matrix;
 
+typedef std::map<char*,matrix*> ids;
+
 typedef struct x {
     int type; // Node type ('+', '-', '*' or 'M')
     matrix *M; // Matrix associated to the node

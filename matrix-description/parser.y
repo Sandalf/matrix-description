@@ -14,6 +14,7 @@ matrix *mtemp = NULL;
 int ncol = 0;
 int nrow = 0;
 node *tree = NULL;
+ids identifiers;
 
 %}
 
@@ -21,19 +22,35 @@ node *tree = NULL;
     float val;
     matrix *mptr;
     node *node; 
+    char* id;
 }
 
+%token <val> NUM
+%token <id> ID
 %token THROW
 
-%token <val> NUM
 %type <val> exp term fact // numeric expressions
 %type <mptr> mdef rowseq row // matrix description
 %type <node> mfact mterm mexp // matrix expressions
-%type thowing
+%type thowing assign st
 
 %%
 
-begin: thowing;
+begin: st;
+
+st:
+    assign
+    | thowing
+    ;
+
+assign:
+    ID ':' mexp {
+        printf("id %s\n", $1);
+        matrix *m = evaluate($3);
+        identifiers[$1] = m;
+        show(*identifiers[$1]);
+    }
+    ;
 
 thowing:
     THROW mexp {
@@ -43,6 +60,7 @@ thowing:
             show(*m);
         }
     }
+    ;
 
 mexp:
     mexp '+' mterm { $$ = newnode(_sum, $1, $3); } 
