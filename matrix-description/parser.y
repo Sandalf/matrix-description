@@ -32,11 +32,16 @@ ids identifiers;
 %type <val> exp term fact // numeric expressions
 %type <mptr> mdef rowseq row // matrix description
 %type <node> mfact mterm mexp // matrix expressions
-%type thowing assign st
+%type thowing assign st stseq
 
 %%
 
-begin: st;
+main: stseq '.';
+
+stseq:
+    stseq ';' st
+    | st
+    ;
 
 st:
     assign
@@ -58,6 +63,8 @@ thowing:
         if (m != NULL) {
             printf("Result:\n");
             show(*m);
+        } else {
+            printf("Error: Null matrix\n");
         }
     }
     ;

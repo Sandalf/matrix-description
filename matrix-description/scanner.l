@@ -11,7 +11,7 @@ int contador = 1;
 
 numero  [0-9]+("."[0-9]+)?
 op      [-+*/:]
-delim   [()\[\],;]
+delim   [()\[\],;.]
 espacio [ \t]
 nlinea  \n
 id      [a-zA-Z]*
