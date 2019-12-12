@@ -24,12 +24,13 @@ bool parse(const char *fname) {
 
 int main(int argc, const char * argv[]) {
     if (parse("prueba.txt")) {
-        printf("Parsed\n");
-//        show(*mresult);
-//        show(*tree->M);
+        printf("Tree:\n");
         traverse(tree, 0);
-        printf("Result:\n");
-        show(*evaluate(tree));
+        matrix *m = evaluate(tree);
+        if (m != NULL) {
+            printf("\nResult:\n");
+            show(*m);
+        }
     } else {
         printf("Not ok\n");
     }

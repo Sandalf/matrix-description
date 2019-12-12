@@ -23,7 +23,8 @@ typedef std::map<int,float> row;
 typedef std::map<int,row> table;
 
 typedef struct {
-    int n,m; // Number of rows and columns
+    int n = 0;
+    int m = 0; // Number of rows and columns
     table data; // Content of the matrix
 } matrix;
 

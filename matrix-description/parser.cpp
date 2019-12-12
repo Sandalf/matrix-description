@@ -68,22 +68,6 @@
 /* First part of user prologue.  */
 #line 1 "parser.y"
 
-// mexp:
-//     mexp '+' mterm { $$ = newnode(_sum, $1, $3); } 
-//     | mexp '-' mterm { $$ = newnode(_dif, $1, $3); } 
-//     | mterm { $$ = $1; }
-//     ;
-
-// mterm:
-//     mterm '*' mfact { $$ = newnode(_mult, $1, $3); }
-//     | mfact { $$ = $1; }
-//     ;
-
-// mfact:
-//     '(' { printf("mfact"); } mexp ')' { $$ = $3; }
-//     | mdef { $$ = newnode(_matrix, mtemp); }
-//     ;
-
 // bison -d parser.y -o parser.cpp
 #include <cstdio>
 #include "abstree.hpp"
@@ -101,7 +85,7 @@ int nrow = 0;
 node *tree = NULL;
 
 
-#line 105 "parser.cpp"
+#line 89 "parser.cpp"
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus
@@ -148,13 +132,13 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 36 "parser.y"
+#line 20 "parser.y"
 
     float val;
     matrix *mptr;
     node *node; 
 
-#line 158 "parser.cpp"
+#line 142 "parser.cpp"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -459,9 +443,9 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    49,    49,    52,    53,    54,    58,    59,    63,    64,
-      68,    68,    72,    72,    73,    77,    77,    78,    82,    83,
-      84,    87,    88,    89,    92,    93,    94
+       0,    33,    33,    36,    37,    38,    42,    43,    47,    48,
+      52,    52,    56,    56,    57,    61,    61,    62,    66,    67,
+      68,    71,    72,    73,    76,    77,    78
 };
 #endif
 
@@ -1264,157 +1248,157 @@ yyreduce:
   switch (yyn)
     {
   case 2:
-#line 49 "parser.y"
+#line 33 "parser.y"
     { tree = (yyvsp[0].node); }
-#line 1270 "parser.cpp"
+#line 1254 "parser.cpp"
     break;
 
   case 3:
-#line 52 "parser.y"
+#line 36 "parser.y"
     { (yyval.node) = newnode(_sum, (yyvsp[-2].node), (yyvsp[0].node)); }
-#line 1276 "parser.cpp"
+#line 1260 "parser.cpp"
     break;
 
   case 4:
-#line 53 "parser.y"
+#line 37 "parser.y"
     { (yyval.node) = newnode(_dif, (yyvsp[-2].node), (yyvsp[0].node)); }
-#line 1282 "parser.cpp"
+#line 1266 "parser.cpp"
     break;
 
   case 5:
-#line 54 "parser.y"
+#line 38 "parser.y"
     { (yyval.node) = (yyvsp[0].node); }
-#line 1288 "parser.cpp"
+#line 1272 "parser.cpp"
     break;
 
   case 6:
-#line 58 "parser.y"
+#line 42 "parser.y"
     { (yyval.node) = newnode(_mult, (yyvsp[-2].node), (yyvsp[0].node)); }
-#line 1294 "parser.cpp"
+#line 1278 "parser.cpp"
     break;
 
   case 7:
-#line 59 "parser.y"
+#line 43 "parser.y"
     { (yyval.node) = (yyvsp[0].node); }
-#line 1300 "parser.cpp"
+#line 1284 "parser.cpp"
     break;
 
   case 8:
-#line 63 "parser.y"
+#line 47 "parser.y"
     { (yyval.node) = (yyvsp[-1].node); }
-#line 1306 "parser.cpp"
+#line 1290 "parser.cpp"
     break;
 
   case 9:
-#line 64 "parser.y"
+#line 48 "parser.y"
     { (yyval.node) = newnode(_matrix, mtemp); }
-#line 1312 "parser.cpp"
+#line 1296 "parser.cpp"
     break;
 
   case 10:
-#line 68 "parser.y"
+#line 52 "parser.y"
     { ncol = 1; nrow = 1; mtemp = newmatrix(ncol,nrow); }
-#line 1318 "parser.cpp"
+#line 1302 "parser.cpp"
     break;
 
   case 11:
-#line 68 "parser.y"
+#line 52 "parser.y"
     { (yyval.mptr) = (yyvsp[-1].mptr); }
-#line 1324 "parser.cpp"
+#line 1308 "parser.cpp"
     break;
 
   case 12:
-#line 72 "parser.y"
-    { nrow++; mtemp->n = nrow; mtemp->m = ncol; ncol = 1; }
-#line 1330 "parser.cpp"
+#line 56 "parser.y"
+    { nrow++; mtemp->n = nrow; ncol = 1; }
+#line 1314 "parser.cpp"
     break;
 
   case 13:
-#line 72 "parser.y"
+#line 56 "parser.y"
     { (yyval.mptr) = mtemp; }
-#line 1336 "parser.cpp"
+#line 1320 "parser.cpp"
     break;
 
   case 14:
-#line 73 "parser.y"
+#line 57 "parser.y"
     { (yyval.mptr) = (yyvsp[0].mptr); }
-#line 1342 "parser.cpp"
+#line 1326 "parser.cpp"
     break;
 
   case 15:
-#line 77 "parser.y"
-    { ncol++; }
-#line 1348 "parser.cpp"
+#line 61 "parser.y"
+    { ncol++; mtemp->m = ncol; }
+#line 1332 "parser.cpp"
     break;
 
   case 16:
-#line 77 "parser.y"
+#line 61 "parser.y"
     { mtemp->data[nrow][ncol] = (yyvsp[0].val); (yyval.mptr) = mtemp; }
-#line 1354 "parser.cpp"
+#line 1338 "parser.cpp"
     break;
 
   case 17:
-#line 78 "parser.y"
+#line 62 "parser.y"
     { mtemp->data[nrow][ncol] = (yyvsp[0].val);  (yyval.mptr) = mtemp; }
-#line 1360 "parser.cpp"
+#line 1344 "parser.cpp"
     break;
 
   case 18:
-#line 82 "parser.y"
+#line 66 "parser.y"
     { (yyval.val) = (yyvsp[-2].val) + (yyvsp[0].val); }
-#line 1366 "parser.cpp"
+#line 1350 "parser.cpp"
     break;
 
   case 19:
-#line 83 "parser.y"
+#line 67 "parser.y"
     { (yyval.val) = (yyvsp[-2].val) - (yyvsp[0].val); }
-#line 1372 "parser.cpp"
+#line 1356 "parser.cpp"
     break;
 
   case 20:
-#line 84 "parser.y"
+#line 68 "parser.y"
     { (yyval.val) = (yyvsp[0].val); }
-#line 1378 "parser.cpp"
+#line 1362 "parser.cpp"
     break;
 
   case 21:
-#line 87 "parser.y"
+#line 71 "parser.y"
     { (yyval.val) = (yyvsp[-2].val) * (yyvsp[0].val); }
-#line 1384 "parser.cpp"
+#line 1368 "parser.cpp"
     break;
 
   case 22:
-#line 88 "parser.y"
+#line 72 "parser.y"
     { (yyval.val) = (yyvsp[-2].val) / (yyvsp[0].val); }
-#line 1390 "parser.cpp"
+#line 1374 "parser.cpp"
     break;
 
   case 23:
-#line 89 "parser.y"
+#line 73 "parser.y"
     { (yyval.val) = (yyvsp[0].val); }
-#line 1396 "parser.cpp"
+#line 1380 "parser.cpp"
     break;
 
   case 24:
-#line 92 "parser.y"
+#line 76 "parser.y"
     { (yyval.val) = (yyvsp[-1].val); }
-#line 1402 "parser.cpp"
+#line 1386 "parser.cpp"
     break;
 
   case 25:
-#line 93 "parser.y"
+#line 77 "parser.y"
     { (yyval.val) = - (yyvsp[0].val); }
-#line 1408 "parser.cpp"
+#line 1392 "parser.cpp"
     break;
 
   case 26:
-#line 94 "parser.y"
+#line 78 "parser.y"
     { (yyval.val) = (yyvsp[0].val); }
-#line 1414 "parser.cpp"
+#line 1398 "parser.cpp"
     break;
 
 
-#line 1418 "parser.cpp"
+#line 1402 "parser.cpp"
 
       default: break;
     }
@@ -1646,7 +1630,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 96 "parser.y"
+#line 80 "parser.y"
 
 
 int yyerror(char *mssg) {

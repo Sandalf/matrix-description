@@ -1,20 +1,4 @@
 %{
-// mexp:
-//     mexp '+' mterm { $$ = newnode(_sum, $1, $3); } 
-//     | mexp '-' mterm { $$ = newnode(_dif, $1, $3); } 
-//     | mterm { $$ = $1; }
-//     ;
-
-// mterm:
-//     mterm '*' mfact { $$ = newnode(_mult, $1, $3); }
-//     | mfact { $$ = $1; }
-//     ;
-
-// mfact:
-//     '(' { printf("mfact"); } mexp ')' { $$ = $3; }
-//     | mdef { $$ = newnode(_matrix, mtemp); }
-//     ;
-
 // bison -d parser.y -o parser.cpp
 #include <cstdio>
 #include "abstree.hpp"
@@ -69,12 +53,12 @@ mdef:
     ;
 
 rowseq:
-    rowseq ';' { nrow++; mtemp->n = nrow; mtemp->m = ncol; ncol = 1; } row { $$ = mtemp; }
+    rowseq ';' { nrow++; mtemp->n = nrow; ncol = 1; } row { $$ = mtemp; }
     | row { $$ = $1; }
     ;
 
 row:
-    row ',' { ncol++; } exp { mtemp->data[nrow][ncol] = $4; $$ = mtemp; }
+    row ',' { ncol++; mtemp->m = ncol; } exp { mtemp->data[nrow][ncol] = $4; $$ = mtemp; }
     | exp { mtemp->data[nrow][ncol] = $1;  $$ = mtemp; }
     ;
 
