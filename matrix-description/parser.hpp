@@ -49,7 +49,8 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    NUM = 258
+    THROW = 258,
+    NUM = 259
   };
 #endif
 
@@ -63,7 +64,7 @@ union YYSTYPE
     matrix *mptr;
     node *node; 
 
-#line 67 "parser.hpp"
+#line 68 "parser.hpp"
 
 };
 typedef union YYSTYPE YYSTYPE;

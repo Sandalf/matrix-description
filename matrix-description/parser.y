@@ -23,14 +23,26 @@ node *tree = NULL;
     node *node; 
 }
 
+%token THROW
+
 %token <val> NUM
 %type <val> exp term fact // numeric expressions
 %type <mptr> mdef rowseq row // matrix description
 %type <node> mfact mterm mexp // matrix expressions
+%type thowing
 
 %%
 
-begin: mexp { tree = $1; };
+begin: thowing;
+
+thowing:
+    THROW mexp {
+        matrix *m = evaluate($2);
+        if (m != NULL) {
+            printf("Result:\n");
+            show(*m);
+        }
+    }
 
 mexp:
     mexp '+' mterm { $$ = newnode(_sum, $1, $3); } 

@@ -17,6 +17,8 @@ nlinea  \n
 
 %%
 
+throw   return THROW;
+
 {numero}  { yylval.val = atof(yytext); return NUM; }
 {op}      return *yytext;
 {delim}   return *yytext;
