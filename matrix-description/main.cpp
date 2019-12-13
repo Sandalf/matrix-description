@@ -23,7 +23,7 @@ bool parse(const char *fname) {
 }
 
 int main(int argc, const char * argv[]) {
-//    printf("test:\n");
+    std::string foo = strdup("foo");
     if (parse("prueba.txt")) {
 //        printf("Tree:\n");
 //        traverse(tree, 0);

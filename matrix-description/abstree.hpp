@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include <map>
+#include <string>
 
 typedef enum {
     _sum,
@@ -28,7 +29,7 @@ typedef struct {
     table data; // Content of the matrix
 } matrix;
 
-typedef std::map<char*,matrix*> ids;
+typedef std::map<std::string,matrix*> ids;
 
 typedef struct x {
     int type; // Node type ('+', '-', '*' or 'M')

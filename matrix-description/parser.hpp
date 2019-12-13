@@ -59,12 +59,12 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 21 "parser.y"
+#line 22 "parser.y"
 
     float val;
     matrix *mptr;
     node *node; 
-    char* id;
+    char *id;
 
 #line 70 "parser.hpp"
 

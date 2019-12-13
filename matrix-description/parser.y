@@ -1,6 +1,7 @@
 %{
 // bison -d parser.y -o parser.cpp
 #include <cstdio>
+#include <string>
 #include "abstree.hpp"
 
 extern int contador;
@@ -22,7 +23,7 @@ ids identifiers;
     float val;
     matrix *mptr;
     node *node; 
-    char* id;
+    char *id;
 }
 
 %token <val> NUM
@@ -50,10 +51,9 @@ st:
 
 assign:
     ID ':' mexp {
-        printf("id %s\n", $1);
+        std::string str($1);
         matrix *m = evaluate($3);
-        identifiers[$1] = m;
-        show(*identifiers[$1]);
+        identifiers[str] = m;
     }
     ;
 
@@ -83,6 +83,15 @@ mterm:
 mfact:
     '(' mexp ')' { $$ = $2; }
     | mdef { $$ = newnode(_matrix, mtemp); }
+    | ID {
+        std::string str($1);
+
+        if(identifiers.count(str) > 0) {
+            $$ = newnode(_matrix, identifiers.find(str)->second);
+        } else {
+            printf("Error: Identifier is undefined\n");
+        }
+    }   
     ;
 
 mdef:
