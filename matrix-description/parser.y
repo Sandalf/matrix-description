@@ -51,6 +51,7 @@ assign:
         std::string str($1);
         matrix *m = evaluate($3);
         identifiers[str] = m;
+        destroy($3);
     }
     ;
 
@@ -62,6 +63,7 @@ thowing:
         } else {
             printf("Error: Null matrix\n");
         }
+        destroy($2);
     }
     ;
 

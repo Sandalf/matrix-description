@@ -47,6 +47,7 @@ node *newnode(tnode, node *, node *);
 matrix *evaluate(node *p);
 void traverse(node *, int);
 void show(matrix &M);
+void destroy(node *p);
 matrix *add(matrix *a, matrix *b);
 matrix *subs(matrix *a, matrix *b);
 matrix *mult(matrix *a, matrix *b);

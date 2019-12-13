@@ -137,3 +137,28 @@ matrix *mult(matrix *a, matrix *b) {
     }
     return m;
 }
+
+void destroy(node *p) {
+    switch (p->type) {
+        case _sum:
+            destroy(p->lft);
+            destroy(p->rgt);
+            delete p;
+            break;
+        case _dif:
+            destroy(p->lft);
+            destroy(p->rgt);
+            delete p;
+            break;
+        case _mult:
+            destroy(p->lft);
+            destroy(p->rgt);
+            delete p;
+            break;
+        case _matrix:
+            delete p;
+            break;
+        default:
+            break;
+    }
+}
