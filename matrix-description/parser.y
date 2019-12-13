@@ -9,12 +9,9 @@ extern int yylex();
 
 int yyerror(char *);
 
-// float resultado = 0.0;
-matrix *mresult = NULL;
 matrix *mtemp = NULL;
 int ncol = 0;
 int nrow = 0;
-node *tree = NULL;
 ids identifiers;
 
 %}
@@ -61,7 +58,6 @@ thowing:
     THROW mexp {
         matrix *m = evaluate($2);
         if (m != NULL) {
-            printf("Result:\n");
             show(*m);
         } else {
             printf("Error: Null matrix\n");

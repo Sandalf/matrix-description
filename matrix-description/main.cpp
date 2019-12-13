@@ -11,7 +11,6 @@
 
 extern FILE* yyin;
 extern int yyparse();
-//extern matrix *mresult;
 extern node *tree;
 
 bool parse(const char *fname) {
@@ -23,17 +22,6 @@ bool parse(const char *fname) {
 }
 
 int main(int argc, const char * argv[]) {
-    std::string foo = strdup("foo");
-    if (parse("prueba.txt")) {
-//        printf("Tree:\n");
-//        traverse(tree, 0);
-//        matrix *m = evaluate(tree);
-//        if (m != NULL) {
-//            printf("\nResult:\n");
-//            show(*m);
-//        }
-    } else {
-        printf("Not ok\n");
-    }
+    parse("prueba.txt");
     return 0;
 }

@@ -42,9 +42,9 @@ void show(matrix &M) {
             printf(" %f", M.data[i][j]);
             if (j < M.m) printf(",");
         }
-        printf(";");
+        if (i < M.n) printf(";");
     }
-    printf("]\n");
+    printf(" ]\n");
 }
 
 void indent (int deep) {

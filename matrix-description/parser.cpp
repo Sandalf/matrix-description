@@ -78,16 +78,13 @@ extern int yylex();
 
 int yyerror(char *);
 
-// float resultado = 0.0;
-matrix *mresult = NULL;
 matrix *mtemp = NULL;
 int ncol = 0;
 int nrow = 0;
-node *tree = NULL;
 ids identifiers;
 
 
-#line 91 "parser.cpp"
+#line 88 "parser.cpp"
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus
@@ -136,14 +133,14 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 22 "parser.y"
+#line 19 "parser.y"
 
     float val;
     matrix *mptr;
     node *node; 
     char *id;
 
-#line 147 "parser.cpp"
+#line 144 "parser.cpp"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -449,10 +446,10 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    40,    40,    43,    44,    48,    49,    53,    66,    78,
-      79,    80,    84,    85,    89,    90,    91,   104,   104,   108,
-     108,   109,   113,   113,   114,   118,   119,   120,   123,   124,
-     125,   128,   129,   130
+       0,    37,    37,    40,    41,    45,    46,    50,    58,    69,
+      70,    71,    75,    76,    80,    81,    82,    94,    94,    98,
+      98,    99,   103,   103,   104,   108,   109,   110,   113,   114,
+     115,   118,   119,   120
 };
 #endif
 
@@ -1263,81 +1260,74 @@ yyreduce:
   switch (yyn)
     {
   case 7:
-#line 53 "parser.y"
+#line 50 "parser.y"
     {
-        // printf("ASSIGN\n");
-        // std::string idname = strdup($1);
         std::string str((yyvsp[-2].id));
-        // printf("id %s\n", str);
         matrix *m = evaluate((yyvsp[0].node));
         identifiers[str] = m;
-        // printf("mfact:id %s %s\n", str, identifiers.find(str)->first);
-        // show(*identifiers[str]);
     }
-#line 1278 "parser.cpp"
+#line 1270 "parser.cpp"
     break;
 
   case 8:
-#line 66 "parser.y"
+#line 58 "parser.y"
     {
         matrix *m = evaluate((yyvsp[0].node));
         if (m != NULL) {
-            printf("Result:\n");
             show(*m);
         } else {
             printf("Error: Null matrix\n");
         }
     }
-#line 1292 "parser.cpp"
+#line 1283 "parser.cpp"
     break;
 
   case 9:
-#line 78 "parser.y"
+#line 69 "parser.y"
     { (yyval.node) = newnode(_sum, (yyvsp[-2].node), (yyvsp[0].node)); }
-#line 1298 "parser.cpp"
+#line 1289 "parser.cpp"
     break;
 
   case 10:
-#line 79 "parser.y"
+#line 70 "parser.y"
     { (yyval.node) = newnode(_dif, (yyvsp[-2].node), (yyvsp[0].node)); }
-#line 1304 "parser.cpp"
+#line 1295 "parser.cpp"
     break;
 
   case 11:
-#line 80 "parser.y"
+#line 71 "parser.y"
     { (yyval.node) = (yyvsp[0].node); }
-#line 1310 "parser.cpp"
+#line 1301 "parser.cpp"
     break;
 
   case 12:
-#line 84 "parser.y"
+#line 75 "parser.y"
     { (yyval.node) = newnode(_mult, (yyvsp[-2].node), (yyvsp[0].node)); }
-#line 1316 "parser.cpp"
+#line 1307 "parser.cpp"
     break;
 
   case 13:
-#line 85 "parser.y"
+#line 76 "parser.y"
     { (yyval.node) = (yyvsp[0].node); }
-#line 1322 "parser.cpp"
+#line 1313 "parser.cpp"
     break;
 
   case 14:
-#line 89 "parser.y"
+#line 80 "parser.y"
     { (yyval.node) = (yyvsp[-1].node); }
-#line 1328 "parser.cpp"
+#line 1319 "parser.cpp"
     break;
 
   case 15:
-#line 90 "parser.y"
+#line 81 "parser.y"
     { (yyval.node) = newnode(_matrix, mtemp); }
-#line 1334 "parser.cpp"
+#line 1325 "parser.cpp"
     break;
 
   case 16:
-#line 91 "parser.y"
+#line 82 "parser.y"
     {
         std::string str((yyvsp[0].id));
-        // printf("mfact:id %s %lu\n", str, identifiers.count(str));
 
         if(identifiers.count(str) > 0) {
             (yyval.node) = newnode(_matrix, identifiers.find(str)->second);
@@ -1345,113 +1335,113 @@ yyreduce:
             printf("Error: Identifier is undefined\n");
         }
     }
-#line 1349 "parser.cpp"
+#line 1339 "parser.cpp"
     break;
 
   case 17:
-#line 104 "parser.y"
+#line 94 "parser.y"
     { ncol = 1; nrow = 1; mtemp = newmatrix(ncol,nrow); }
-#line 1355 "parser.cpp"
+#line 1345 "parser.cpp"
     break;
 
   case 18:
-#line 104 "parser.y"
+#line 94 "parser.y"
     { (yyval.mptr) = (yyvsp[-1].mptr); }
-#line 1361 "parser.cpp"
+#line 1351 "parser.cpp"
     break;
 
   case 19:
-#line 108 "parser.y"
+#line 98 "parser.y"
     { nrow++; mtemp->n = nrow; ncol = 1; }
-#line 1367 "parser.cpp"
+#line 1357 "parser.cpp"
     break;
 
   case 20:
-#line 108 "parser.y"
+#line 98 "parser.y"
     { (yyval.mptr) = mtemp; }
-#line 1373 "parser.cpp"
+#line 1363 "parser.cpp"
     break;
 
   case 21:
-#line 109 "parser.y"
+#line 99 "parser.y"
     { (yyval.mptr) = (yyvsp[0].mptr); }
-#line 1379 "parser.cpp"
+#line 1369 "parser.cpp"
     break;
 
   case 22:
-#line 113 "parser.y"
+#line 103 "parser.y"
     { ncol++; mtemp->m = ncol; }
-#line 1385 "parser.cpp"
+#line 1375 "parser.cpp"
     break;
 
   case 23:
-#line 113 "parser.y"
+#line 103 "parser.y"
     { mtemp->data[nrow][ncol] = (yyvsp[0].val); (yyval.mptr) = mtemp; }
-#line 1391 "parser.cpp"
+#line 1381 "parser.cpp"
     break;
 
   case 24:
-#line 114 "parser.y"
+#line 104 "parser.y"
     { mtemp->data[nrow][ncol] = (yyvsp[0].val);  (yyval.mptr) = mtemp; }
-#line 1397 "parser.cpp"
+#line 1387 "parser.cpp"
     break;
 
   case 25:
-#line 118 "parser.y"
+#line 108 "parser.y"
     { (yyval.val) = (yyvsp[-2].val) + (yyvsp[0].val); }
-#line 1403 "parser.cpp"
+#line 1393 "parser.cpp"
     break;
 
   case 26:
-#line 119 "parser.y"
+#line 109 "parser.y"
     { (yyval.val) = (yyvsp[-2].val) - (yyvsp[0].val); }
-#line 1409 "parser.cpp"
+#line 1399 "parser.cpp"
     break;
 
   case 27:
-#line 120 "parser.y"
+#line 110 "parser.y"
     { (yyval.val) = (yyvsp[0].val); }
-#line 1415 "parser.cpp"
+#line 1405 "parser.cpp"
     break;
 
   case 28:
-#line 123 "parser.y"
+#line 113 "parser.y"
     { (yyval.val) = (yyvsp[-2].val) * (yyvsp[0].val); }
-#line 1421 "parser.cpp"
+#line 1411 "parser.cpp"
     break;
 
   case 29:
-#line 124 "parser.y"
+#line 114 "parser.y"
     { (yyval.val) = (yyvsp[-2].val) / (yyvsp[0].val); }
-#line 1427 "parser.cpp"
+#line 1417 "parser.cpp"
     break;
 
   case 30:
-#line 125 "parser.y"
+#line 115 "parser.y"
     { (yyval.val) = (yyvsp[0].val); }
-#line 1433 "parser.cpp"
+#line 1423 "parser.cpp"
     break;
 
   case 31:
-#line 128 "parser.y"
+#line 118 "parser.y"
     { (yyval.val) = (yyvsp[-1].val); }
-#line 1439 "parser.cpp"
+#line 1429 "parser.cpp"
     break;
 
   case 32:
-#line 129 "parser.y"
+#line 119 "parser.y"
     { (yyval.val) = - (yyvsp[0].val); }
-#line 1445 "parser.cpp"
+#line 1435 "parser.cpp"
     break;
 
   case 33:
-#line 130 "parser.y"
+#line 120 "parser.y"
     { (yyval.val) = (yyvsp[0].val); }
-#line 1451 "parser.cpp"
+#line 1441 "parser.cpp"
     break;
 
 
-#line 1455 "parser.cpp"
+#line 1445 "parser.cpp"
 
       default: break;
     }
@@ -1683,7 +1673,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 132 "parser.y"
+#line 122 "parser.y"
 
 
 int yyerror(char *mssg) {
